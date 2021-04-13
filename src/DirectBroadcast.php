@@ -5,7 +5,6 @@ namespace polyv\src;
 
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Request;
 
 /**
  * 直播创建
@@ -31,19 +30,20 @@ class DirectBroadcast
         $this->config = $config;
     }
 
-    public function create(): void
+    /**
+     * 发送请求创建直播间
+     * @return string
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function create(): string
     {
-        $request = new Request(
-            'POST',
-            'https://api.polyv.net/live/v2/channels/',
-            [],
-            $this->buildData()
-        );
-
         $client = new Client();
-        $response = $client->send($request, ['http_errors' => false]);
-
-        dd($response->getBody()->getContents());
+        $response = $client->request(
+            'POST',
+            'https://api.polyv.net/live/v2/channels/?' . $this->buildData(),
+            ['http_errors' => false]
+        );
+        return $response->getBody()->getContents();
     }
 
 
@@ -133,9 +133,10 @@ class DirectBroadcast
      */
     public function buildData(): string
     {
+        [$s1, $s2] = explode(' ', microtime());
         $params = [
             'appId' => $this->config->getAppId(),
-            'timestamp' => microtime(),
+            'timestamp' => sprintf('%.0f', ($s1 + $s2) * 1000),
             'userId' => $this->config->getUserId(),
             'name' => $this->name,
             'channelPasswd' => $this->channelPasswd,
@@ -147,6 +148,7 @@ class DirectBroadcast
         ];
 
         $params['sign'] = $this->config->getSign($params);
+
         return http_build_query($params);
     }
 }

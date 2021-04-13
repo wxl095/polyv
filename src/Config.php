@@ -2,6 +2,10 @@
 
 namespace polyv\src;
 
+/**
+ * Class Config
+ * @package polyv\src
+ */
 class Config
 {
     /**
@@ -25,13 +29,14 @@ class Config
     }
 
     /**
+     * 获取签名
      * @param $params
      * @return string
      */
     public function getSign($params): string
     {
         ksort($params, SORT_ASC);
-        $str = '';
+        $str = $this->appSecret;
         foreach ($params as $key => $value) {
             $str .= $key;
             $str .= $value;
@@ -39,7 +44,10 @@ class Config
         return strtoupper(md5($str . $this->appSecret));
     }
 
-    public function getAppId()
+    /**
+     * @return string
+     */
+    public function getAppId(): string
     {
         return $this->appId;
     }
@@ -47,7 +55,7 @@ class Config
     /**
      * @return string
      */
-    public function getAppSecret():string
+    public function getAppSecret(): string
     {
         return $this->appSecret;
     }
@@ -56,7 +64,7 @@ class Config
      * 获取用户ID
      * @return string
      */
-    public function getUserId():string
+    public function getUserId(): string
     {
         return $this->userId;
     }
