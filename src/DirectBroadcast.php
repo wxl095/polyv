@@ -113,15 +113,20 @@ class DirectBroadcast
         $this->pureRtcEnabled = $pureRtcEnabled;
     }
 
+    /**
+     * @param int $number
+     */
     public function setMaxViewer(int $number): void
     {
         $this->maxViewer = $number;
     }
 
-
+    /**
+     * @param string $publisher
+     */
     public function setPublisher(string $publisher): void
     {
-        $this->publisher;
+        $this->publisher = $publisher;
     }
 
     /**
