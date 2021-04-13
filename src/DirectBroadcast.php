@@ -25,6 +25,7 @@ class DirectBroadcast
     private $linkMicLimit = -1;
     private $pureRtcEnabled = 'N';
     private $maxViewer = 0;
+    private $publisher = '主持人';
 
     public function __construct(Config $config)
     {
@@ -151,6 +152,7 @@ class DirectBroadcast
             'scene' => $this->scene,
             'linkMicLimit' => $this->linkMicLimit,
             'pureRtcEnabled' => $this->pureRtcEnabled,
+            'publisher' => $this->publisher,
         ];
         if ($this->maxViewer !== 0 && $this->maxViewer > 0) {
             $params['maxViewer'] = $this->maxViewer;
