@@ -51,87 +51,77 @@ class DirectBroadcast
 
     /**
      * @param int $autoPlay
-     * @return DirectBroadcast
      */
-    public function setAutoPlay(int $autoPlay): self
+    public function setAutoPlay(int $autoPlay): void
     {
         $this->autoPlay = $autoPlay;
-        return $this;
     }
 
     /**
      * @param string $channelPasswd
-     * @return DirectBroadcast
      */
-    public function setChannelPasswd(string $channelPasswd): self
+    public function setChannelPasswd(string $channelPasswd): void
     {
         $this->channelPasswd = $channelPasswd;
-        return $this;
     }
 
     /**
      * @param Config $config
-     * @return DirectBroadcast
      */
-    public function setConfig(Config $config): self
+    public function setConfig(Config $config): void
     {
         $this->config = $config;
-        return $this;
     }
 
     /**
      * @param string $scene
-     * @return DirectBroadcast
      */
-    public function setScene(string $scene): self
+    public function setScene(string $scene): void
     {
         $this->scene = $scene;
-        return $this;
     }
 
     /**
      * @param int $linkMicLimit
-     * @return DirectBroadcast
      */
-    public function setLinkMicLimit(int $linkMicLimit): self
+    public function setLinkMicLimit(int $linkMicLimit): void
     {
         $this->linkMicLimit = $linkMicLimit;
-        return $this;
     }
 
     /**
      * @param string $name
-     * @return DirectBroadcast
      */
-    public function setName(string $name): self
+    public function setName(string $name): void
     {
         $this->name = $name;
-        return $this;
     }
 
     /**
      * @param string $playerColor
-     * @return DirectBroadcast
      */
-    public function setPlayerColor(string $playerColor): self
+    public function setPlayerColor(string $playerColor): void
     {
         $this->playerColor = $playerColor;
-        return $this;
     }
 
     /**
      * @param string $pureRtcEnabled
-     * @return DirectBroadcast
      */
-    public function setPureRtcEnabled(string $pureRtcEnabled): self
+    public function setPureRtcEnabled(string $pureRtcEnabled): void
     {
         $this->pureRtcEnabled = $pureRtcEnabled;
-        return $this;
     }
 
     public function setMaxViewer(int $number): void
     {
         $this->maxViewer = $number;
+    }
+
+
+    public function setPublisher(string $publisher): void
+    {
+        $this->publisher;
     }
 
     /**
