@@ -25,7 +25,6 @@ class DirectBroadcast
     private $linkMicLimit = -1;
     private $pureRtcEnabled = 'N';
     private $maxViewer = 0;
-    private $publisher = '主持人';
 
     public function __construct(Config $config)
     {
@@ -119,14 +118,6 @@ class DirectBroadcast
     public function setMaxViewer(int $number): void
     {
         $this->maxViewer = $number;
-    }
-
-    /**
-     * @param string $publisher
-     */
-    public function setPublisher(string $publisher): void
-    {
-        $this->publisher = $publisher;
     }
 
     /**
