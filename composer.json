@@ -16,7 +16,7 @@
   "autoload": {
     "psr-4": {
       "\\polyv\\":"/",
-      "\\polyv\\src\\": "src"
+      "\\polyv\\src\\": "src/"
     }
   }
 }
