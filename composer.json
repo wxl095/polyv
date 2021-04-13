@@ -1,16 +1,22 @@
 {
-    "name": "wxl/polyv",
-    "description": "保利威接口调用",
-    "type": "library",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "王新龙",
-            "email": "xinlong.wang@blue-dot.cn"
-        }
-    ],
-    "minimum-stability": "stable",
-    "require": {
-        "guzzlehttp/guzzle": "^7.3"
+  "name": "wxl/polyv",
+  "description": "保利威接口调用",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "王新龙",
+      "email": "xinlong.wang@blue-dot.cn"
     }
+  ],
+  "minimum-stability": "stable",
+  "require": {
+    "guzzlehttp/guzzle": "^7.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "\\polyv\\":"/",
+      "\\polyv\\src\\": "src"
+    }
+  }
 }

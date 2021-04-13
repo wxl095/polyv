@@ -14,6 +14,9 @@ use GuzzleHttp\Psr7\Request;
  */
 class DirectBroadcast
 {
+    /**
+     * @var Config
+     */
     private $config;
     private $name;
     private $channelPasswd;
@@ -46,6 +49,7 @@ class DirectBroadcast
 
     /**
      * @param int $autoPlay
+     * @return DirectBroadcast
      */
     public function setAutoPlay(int $autoPlay): self
     {
