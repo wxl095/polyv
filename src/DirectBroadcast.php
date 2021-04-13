@@ -24,6 +24,7 @@ class DirectBroadcast
     private $scene = 'alone';
     private $linkMicLimit = -1;
     private $pureRtcEnabled = 'N';
+    private $maxViewer = 0;
 
     public function __construct(Config $config)
     {
@@ -127,11 +128,16 @@ class DirectBroadcast
         return $this;
     }
 
+    public function setMaxViewer(int $number): void
+    {
+        $this->maxViewer = $number;
+    }
+
     /**
      *  构建参数
      * @return string
      */
-    public function buildData(): string
+    private function buildData(): string
     {
         [$s1, $s2] = explode(' ', microtime());
         $params = [
@@ -146,7 +152,9 @@ class DirectBroadcast
             'linkMicLimit' => $this->linkMicLimit,
             'pureRtcEnabled' => $this->pureRtcEnabled,
         ];
-
+        if ($this->maxViewer !== 0 && $this->maxViewer > 0) {
+            $params['maxViewer'] = $this->maxViewer;
+        }
         $params['sign'] = $this->config->getSign($params);
 
         return http_build_query($params);
