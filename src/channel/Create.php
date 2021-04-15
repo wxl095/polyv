@@ -1,22 +1,18 @@
 <?php
 
 
-namespace polyv\src;
+namespace polyv\src\channel;
 
-
+use polyv\src\Config;
 use GuzzleHttp\Client;
 
 /**
- * 直播创建
- * Class DirectBroadcast
+ * 直播频道创建
+ * Class Create
  * @package polyv\src
  */
-class DirectBroadcast
+class Create extends Channel
 {
-    /**
-     * @var Config
-     */
-    private $config;
     private $name;
     private $channelPasswd;
     private $autoPlay = 1;
@@ -26,17 +22,13 @@ class DirectBroadcast
     private $pureRtcEnabled = 'N';
     private $maxViewer = 0;
 
-    public function __construct(Config $config)
-    {
-        $this->config = $config;
-    }
 
     /**
      * 发送请求创建直播间
      * @return string
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function create(): string
+    public function send(): string
     {
         $client = new Client();
         $response = $client->request(
@@ -122,29 +114,18 @@ class DirectBroadcast
 
     /**
      *  构建参数
-     * @return string
      */
-    private function buildData(): string
+    protected function buildData(): void
     {
-        [$s1, $s2] = explode(' ', microtime());
-        $params = [
-            'appId' => $this->config->getAppId(),
-            'timestamp' => sprintf('%.0f', ($s1 + $s2) * 1000),
-            'userId' => $this->config->getUserId(),
-            'name' => $this->name,
-            'channelPasswd' => $this->channelPasswd,
-            'autoPlay' => $this->autoPlay,
-            'playerColor' => $this->playerColor,
-            'scene' => $this->scene,
-            'linkMicLimit' => $this->linkMicLimit,
-            'pureRtcEnabled' => $this->pureRtcEnabled,
-            'publisher' => $this->publisher,
-        ];
-        if ($this->maxViewer !== 0 && $this->maxViewer > 0) {
-            $params['maxViewer'] = $this->maxViewer;
-        }
-        $params['sign'] = $this->config->getSign($params);
-
-        return http_build_query($params);
+        parent::buildData();
+        $this->params['userId'] = $this->config->getUserId();
+        $this->params['name'] = $this->name;
+        $this->params['channelPasswd'] = $this->channelPasswd;
+        $this->params['autoPlay'] = $this->autoPlay;
+        $this->params['playerColor'] = $this->playerColor;
+        $this->params['scene'] = $this->scene;
+        $this->params['linkMicLimit'] = $this->linkMicLimit;
+        $this->params['pureRtcEnabled'] = $this->pureRtcEnabled;
+        $this->params['sign'] = $this->config->getSign($this->params);
     }
 }

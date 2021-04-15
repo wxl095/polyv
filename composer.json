@@ -15,7 +15,8 @@
   },
   "autoload": {
     "psr-4": {
-      "polyv\\src\\": "src"
+      "polyv\\src\\": "src",
+      "polyv\\src\\channel\\": "src/channel"
     }
   }
 }

@@ -3,17 +3,16 @@
 namespace polyv\src;
 
 /**
- * Class Config
+ * Class Config 保利威账号信息配置
  * @package polyv\src
  */
 class Config
 {
-    /**
-     * @var string 保利威appId
-     */
+    /** @var string 保利威appId */
     private $appId;
     private $appSecret;
     private $userId;
+    protected $timestamp;
 
     /**
      * Config constructor.
@@ -26,6 +25,8 @@ class Config
         $this->appId = $app_id;
         $this->appSecret = $app_secret;
         $this->userId = $user_id;
+        [$s1, $s2] = explode(' ', microtime());
+        $this->timestamp = sprintf('%.0f', ($s1 + $s2) * 1000);
     }
 
     /**
@@ -67,5 +68,14 @@ class Config
     public function getUserId(): string
     {
         return $this->userId;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getTimestamp(): string
+    {
+        return $this->timestamp;
     }
 }
