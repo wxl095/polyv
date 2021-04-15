@@ -30,10 +30,11 @@ class Create extends Channel
      */
     public function send(): string
     {
+        $this->buildData();
         $client = new Client();
         $response = $client->request(
             'POST',
-            'https://api.polyv.net/live/v2/channels/?' . $this->buildData(),
+            'https://api.polyv.net/live/v2/channels/?' . http_build_query($this->params),
             ['http_errors' => false]
         );
         return $response->getBody()->getContents();
