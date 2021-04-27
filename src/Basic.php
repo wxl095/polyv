@@ -1,19 +1,17 @@
 <?php
 
 
-namespace polyv\src\channel;
+namespace polyv\src;
 
 
-use polyv\src\Config;
-
-abstract class Channel
+abstract class Basic
 {
     protected $config;
     protected $params;
 
-    public function __construct(Config $config)
+    public function __construct()
     {
-        $this->config = $config;
+        $this->config = new Config($_ENV['POLYV_APP_ID'], $_ENV['POLYV_APP_SECRET'], $_ENV['POLYV_USER_ID']);
     }
 
     public function send(): string

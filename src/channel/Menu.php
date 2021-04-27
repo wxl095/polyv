@@ -5,8 +5,9 @@ namespace polyv\src\channel;
 
 
 use GuzzleHttp\Client;
+use polyv\src\Basic;
 
-class Menu extends Channel
+class Menu extends Basic
 {
     protected $channelId;
     protected $name;

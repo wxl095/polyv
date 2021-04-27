@@ -3,6 +3,7 @@
 
 namespace polyv\src\channel;
 
+use polyv\src\Basic;
 use polyv\src\Config;
 use GuzzleHttp\Client;
 
@@ -11,16 +12,18 @@ use GuzzleHttp\Client;
  * Class Create
  * @package polyv\src
  */
-class Create extends Channel
+class Create extends Basic
 {
     private $name;
     private $channelPasswd;
     private $autoPlay = 1;
     private $playerColor = '#666666';
-    private $scene = 'alone';
+    /**
+     * @var string 直播场景： alone 活动拍摄 ppt 三分屏 topclass 大班课
+     */
+    private $scene = 'ppt';
     private $linkMicLimit = -1;
-    private $pureRtcEnabled = 'N';
-    private $maxViewer = 0;
+    private $pureRtcEnabled = 'Y';
 
 
     /**
