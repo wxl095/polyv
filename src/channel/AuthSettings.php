@@ -90,6 +90,10 @@ class AuthSettings extends Basic
         $this->channelId = $channelId;
     }
 
+    /**
+     * @return string
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function send(): string
     {
         $this->buildData();
