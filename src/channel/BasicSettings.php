@@ -6,6 +6,7 @@ namespace polyv\src\channel;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
+use InvalidArgumentException;
 use polyv\src\Basic;
 
 /**
@@ -208,17 +209,30 @@ class BasicSettings extends Basic
         $this->settings['basicSetting']['showDanmuInfoEnabled'] = $enabled;
     }
 
-    public function buildData(): void
+    protected function buildData(): void
     {
         parent::buildData();
         $this->params['channelId'] = $this->channelId;
         $this->params['sign'] = $this->config->getSign($this->params);
     }
 
+    /**
+     * 发送请求
+     * @return string
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function send(): string
     {
-        $request = new request('POST', $this->url . http_build_query($this->params), [], json_encode($this->settings));
+        $this->buildData();
+        if (empty($this->params['channelId'])) {
+            throw new InvalidArgumentException('channelId不能为空,请用setChannelId方法设置频道ID');
+        }
+        $request = new request('POST', $this->url . http_build_query($this->params),
+            ['Content-Type' => 'application/json'],
+            json_encode($this->settings)
+        );
         $client = new Client();
         $response = $client->send($request, ['http_errors' => false]);
+        return $response->getBody()->getContents();
     }
 }

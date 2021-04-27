@@ -16,7 +16,7 @@ abstract class Basic
 
     public function send(): string
     {
-
+        $this->buildData();
     }
 
     protected function buildData(): void

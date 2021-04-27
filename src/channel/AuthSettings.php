@@ -2,6 +2,8 @@
 
 namespace polyv\src\channel;
 
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
 use polyv\src\Basic;
 
 /**
@@ -11,7 +13,7 @@ use polyv\src\Basic;
  */
 class AuthSettings extends Basic
 {
-    protected $url = "https://api.polyv.net/live/v3/channel/auth/update";
+    protected $url = "https://api.polyv.net/live/v3/channel/auth/update?";
     protected $settings = [
         'authSettings' => [
             [
@@ -26,6 +28,10 @@ class AuthSettings extends Basic
             ]
         ],
     ];
+    /**
+     * @var int
+     */
+    private $channelId;
 
     /**
      * 主要观看条件为1，次要观看条件为2
@@ -77,20 +83,33 @@ class AuthSettings extends Basic
         $this->settings['authSettings'][0]['externalRedirectUri'] = $externalRedirectUri;
     }
 
-
-//    public function check()
-//    {
-//        $this->settings['authSettings']
-//    }
-
+    /**
+     * 设置频道ID
+     * @param int $channelId
+     */
+    public function setChannelId(int $channelId): void
+    {
+        $this->channelId = $channelId;
+    }
 
     public function send(): string
     {
+        parent::send();
+        $request = new Request('POST', $this->url . http_build_query($this->params),
+            ['Content-Type' => 'application/json'],
+            json_encode($this->settings)
+        );
+        $client = new Client();
+        $response = $client->send($request, ['http_errors' => false]);
+        return $response->getBody()->getContents();
     }
 
-    public function buildData(): void
+    protected function buildData(): void
     {
         parent::buildData();
-
+        if ($this->channelId) {
+            $this->params['channelId'] = $this->channelId;
+        }
+        $this->params['sign'] = $this->config->getSign($this->params);
     }
 }
