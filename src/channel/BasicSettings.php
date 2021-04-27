@@ -20,9 +20,9 @@ class BasicSettings extends Basic
     protected $channelId;
     protected $settings = [
         'basicSetting' => [
-            "name" => "",// 频道名称
-            "channelPasswd" => "",// 频道密码,长度不能超过16位
-            "publisher" => "",// 	主持人名称
+//            "name" => "",// 频道名称
+//            "channelPasswd" => "",// 频道密码,长度不能超过16位
+//            "publisher" => "",// 	主持人名称
             "startTime" => 0,// 直播开始时间，13位时间戳，设置为0 表示关闭直播开始时间显示
             "pageView" => 1000,// 	累积观看数
             "likes" => 666,// 点赞数
@@ -33,7 +33,7 @@ class BasicSettings extends Basic
             "consultingMenuEnabled" => "N",//咨询提问开关
             "maxViewerRestrict" => "Y",// 是否限制最大观看人数
             "maxViewer" => 100,//最大在线人数
-            "categoryId" => 0,// 频道的所属分类（分类ID可通过“获取直播分类”接口得到）
+//            "categoryId" => 0,// 频道的所属分类（分类ID可通过“获取直播分类”接口得到）
             'linkMicLimit' => -1,//连麦人数，-1：使用账号的连麦人数，范围大于等于-1，小于等于账号的连麦人数，最大16人
             'operation' => 'N',//是否增加转播关联，Y：表示增加关联，N：表示取消关联 (注：需要开启频道转播功能该参数才生效)
             'receiveChannelIds' => '',//接收转播频道号，多个频道号用半角逗号,隔开(注：需要开启频道转播功能该参数才生效)

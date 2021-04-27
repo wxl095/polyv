@@ -17,14 +17,12 @@ class AuthSettings extends Basic
     protected $settings = [
         'authSettings' => [
             [
-                [
-                    "rank" => 1,// 主要观看条件为1，次要观看条件为2
-                    "enabled" => "Y",// 	是否开启，Y为开启，N为关闭
-                    "authType" => "external",//付费观看-pay，验证码观看-code，白名单观看-phone，登记观看-info，自定义授权观看-custom，外部授权-external,直接授权-direct
-                    "externalKey" => "L0EjokKI4O",
-                    "externalUri" => "",
-                    'externalRedirectUri' => ''
-                ]
+                "rank" => 1,// 主要观看条件为1，次要观看条件为2
+                "enabled" => "Y",// 	是否开启，Y为开启，N为关闭
+                "authType" => "external",//付费观看-pay，验证码观看-code，白名单观看-phone，登记观看-info，自定义授权观看-custom，外部授权-external,直接授权-direct
+                "externalKey" => "L0EjokKI4O",
+                "externalUri" => "",
+                'externalRedirectUri' => ''
             ]
         ],
     ];
@@ -94,7 +92,7 @@ class AuthSettings extends Basic
 
     public function send(): string
     {
-        parent::send();
+        $this->buildData();
         $request = new Request('POST', $this->url . http_build_query($this->params),
             ['Content-Type' => 'application/json'],
             json_encode($this->settings)
