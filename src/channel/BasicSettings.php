@@ -16,7 +16,7 @@ use polyv\src\Basic;
  */
 class BasicSettings extends Basic
 {
-    protected $url = "https://api.polyv.net/live/v3/channel/basic/update";
+    protected $url = "https://api.polyv.net/live/v3/channel/basic/update?";
     protected $channelId;
     protected $settings = [
         'basicSetting' => [
