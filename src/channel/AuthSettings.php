@@ -7,8 +7,8 @@ use GuzzleHttp\Psr7\Request;
 use polyv\src\Basic;
 
 /**
- * 创建并初始化频道
- * Class basicCreate
+ * 设置观看条件
+ * Class AuthSettings
  * @package polyv\src\channel
  */
 class AuthSettings extends Basic

@@ -10,8 +10,8 @@ use InvalidArgumentException;
 use polyv\src\Basic;
 
 /**
- * 创建并初始化频道
- * Class basicCreate
+ * 修改频道的相关设置
+ * Class BasicSettings
  * @package polyv\src\channel
  */
 class BasicSettings extends Basic
