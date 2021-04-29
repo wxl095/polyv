@@ -10,7 +10,13 @@ use polyv\src\Basic;
 class ViewLog extends Basic
 {
     private $require = ['appId', 'timestamp', 'page', 'startTime&&endTime||currentDay', 'sign'];
-    private $url = "https://api.polyv.net/live/v2/statistics/{channelId}/viewlog?";
+    private $url = "https://api.polyv.net/live/v2/statistics/%s/viewlog?";
+    private $channelId;
+
+    public function setChannelId($channelId)
+    {
+        $this->channelId = $channelId;
+    }
 
     public function setPage($page): void
     {
@@ -86,7 +92,9 @@ class ViewLog extends Basic
 
     public function send(): string
     {
+        $this->buildData();
         $client = new Client();
-        $client->request('GET', $this->url . http_build_query($this->params));
+        $response = $client->request('GET', sprintf($this->url, $this->channelId) . http_build_query($this->params), ['http_errors' => false]);
+        return $response->getBody()->getContents();
     }
 }
