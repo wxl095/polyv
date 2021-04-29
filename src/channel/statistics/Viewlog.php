@@ -7,12 +7,8 @@ namespace polyv\src\channel\statistics;
 use GuzzleHttp\Client;
 use polyv\src\Basic;
 
-class Viewlog extends Basic
+class ViewLog extends Basic
 {
-//    public function query($channelId, $page, $startTime, $endTime)
-//    {
-//
-//    }
     private $require = ['appId', 'timestamp', 'page', 'startTime&&endTime||currentDay', 'sign'];
     private $url = "https://api.polyv.net/live/v2/statistics/{channelId}/viewlog?";
 
