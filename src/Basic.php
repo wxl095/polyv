@@ -14,7 +14,7 @@ abstract class Basic
         $this->config = new Config($_ENV['POLYV_APP_ID'], $_ENV['POLYV_APP_SECRET'], $_ENV['POLYV_USER_ID']);
     }
 
-    public function send(): string
+    public function send()
     {
         $this->buildData();
         $this->params['sign'] = $this->config->getSign($this->params);
