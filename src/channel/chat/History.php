@@ -14,7 +14,7 @@ use polyv\src\Basic;
  */
 class History extends Basic
 {
-    private $url = "https://api.polyv.net/live/v3/channel/chat/get-history";
+    private $url = "https://api.polyv.net/live/v3/channel/chat/get-history?";
 
     public function setChannelId(int $channelId)
     {
@@ -28,8 +28,8 @@ class History extends Basic
      */
     public function setQueryTime(int $start_time, int $end_time): void
     {
-        $this->params['startTime'] = date("Y-m-d H:i:s", $start_time);
-        $this->params['endTime'] = date("Y-m-d H:i:s", $end_time);
+        $this->params['startDay'] = date("Y-m-d H:i:s", $start_time);
+        $this->params['endDay'] = date("Y-m-d H:i:s", $end_time);
     }
 
     /**
@@ -98,7 +98,8 @@ class History extends Basic
 
     public function send(): string
     {
-        $request = new Request('POST', $this->url, ['content-type' => 'application/json'], http_build_query($this->params));
+        parent::send();
+        $request = new Request('get', $this->url . http_build_query($this->params));
         $client = new Client();
         $response = $client->send($request, ['http_errors' => false]);
         return $response->getBody()->getContents();

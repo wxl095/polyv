@@ -31,10 +31,15 @@ class ViewLog extends Basic
         $this->params['currentDay'] = $currentDay;
     }
 
+    /**
+     * 设置查询时间范围（10位秒级时间戳）
+     * @param int $start_time
+     * @param int $end_time
+     */
     public function setQueryTime(int $start_time, int $end_time): void
     {
-        $this->params['startTime'] = $start_time;
-        $this->params['endTime'] = $end_time;
+        $this->params['startTime'] = $start_time * 1000;
+        $this->params['endTime'] = $end_time * 1000;
     }
 
     /**
@@ -60,7 +65,7 @@ class ViewLog extends Basic
      * 观看用户昵称
      * @param string $nickname
      */
-    public function setNickname(string $nickname)
+    public function setNickname(string $nickname): void
     {
         $this->params['param2'] = $nickname;
     }
@@ -83,16 +88,9 @@ class ViewLog extends Basic
         $this->params['pageSize'] = $pageSize;
     }
 
-
-    protected function buildData(): void
-    {
-        parent::buildData();
-        $this->params['sign'] = $this->config->getSign($this->params);
-    }
-
     public function send(): string
     {
-        $this->buildData();
+        parent::send();
         $client = new Client();
         $response = $client->request('GET', sprintf($this->url, $this->channelId) . http_build_query($this->params), ['http_errors' => false]);
         return $response->getBody()->getContents();
