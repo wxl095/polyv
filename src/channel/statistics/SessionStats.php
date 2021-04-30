@@ -45,14 +45,15 @@ class SessionStats extends Basic
     }
 
 
-    protected function buildData(): void
-    {
-        parent::buildData();
-        $this->params['sign'] = $this->config->getSign($this->params);
-    }
+//    protected function buildData(): void
+//    {
+//        parent::buildData();
+//        $this->params['sign'] = $this->config->getSign($this->params);
+//    }
 
     public function send(): string
     {
+        parent::send();
         $client = new Client();
         $response = $client->request('GET', $this->url . http_build_query($this->params));
         return $response->getBody()->getContents();
