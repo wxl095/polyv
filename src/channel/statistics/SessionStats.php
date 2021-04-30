@@ -14,39 +14,40 @@ use polyv\src\Basic;
 class SessionStats extends Basic
 {
     protected $url = "https://api.polyv.net/live/v3/channel/statistics/get-session-stats?";
-    protected $channelId;
-    protected $startTime;
-    protected $endTime;
-    protected $sessionIds;
 
+    /**
+     * 设置频道
+     * @param int $channelId
+     */
     public function setChannelId(int $channelId): void
     {
-        $this->channelId = $channelId;
+        $this->params['channelId'] = $channelId;
     }
 
+    /**
+     * 设置查询时间范围（13位毫秒级时间戳）
+     * @param int $start_time
+     * @param int $end_time
+     */
     public function setQueryTime(int $start_time, int $end_time): void
     {
-        $this->startTime = $start_time;
-        $this->endTime = $end_time;
+        $this->params['startTime'] = $start_time;
+        $this->params['endTime'] = $end_time;
     }
 
+    /**
+     * 设置场次id
+     * @param array $sessionIds
+     */
     public function setSessionIds(array $sessionIds): void
     {
-        $this->sessionIds = implode(',', $sessionIds);
+        $this->params['sessionIds'] = implode(',', $sessionIds);
     }
 
 
     protected function buildData(): void
     {
         parent::buildData();
-        $this->params['channelId'] = $this->channelId;
-        if ($this->startTime && $this->endTime) {
-            $this->params['startTime'] = $this->startTime;
-            $this->params['endTime'] = $this->endTime;
-        }
-        if ($this->sessionIds) {
-            $this->params['sessionIds'] = $this->sessionIds;
-        }
         $this->params['sign'] = $this->config->getSign($this->params);
     }
 

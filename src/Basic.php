@@ -17,6 +17,7 @@ abstract class Basic
     public function send(): string
     {
         $this->buildData();
+        $this->params['sign'] = $this->config->getSign($this->params);
     }
 
     protected function buildData(): void
