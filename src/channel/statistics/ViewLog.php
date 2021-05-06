@@ -9,7 +9,7 @@ use polyv\src\Basic;
 
 class ViewLog extends Basic
 {
-    private $require = ['appId', 'timestamp', 'page', 'startTime&&endTime||currentDay', 'sign'];
+    protected $require = ['appId', 'timestamp', 'page', 'sign', [['startTime', 'endTime'], ['currentDay']]];
     private $url = "https://api.polyv.net/live/v2/statistics/%s/viewlog?";
     private $channelId;
 
@@ -88,6 +88,10 @@ class ViewLog extends Basic
         $this->params['pageSize'] = $pageSize;
     }
 
+    /**
+     * @return string
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function send(): string
     {
         parent::send();

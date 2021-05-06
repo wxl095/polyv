@@ -16,6 +16,7 @@ abstract class Basic
 
     public function send()
     {
+        $this->check();
         $this->buildData();
         $this->params['sign'] = $this->config->getSign($this->params);
     }
@@ -24,5 +25,45 @@ abstract class Basic
     {
         $this->params['appId'] = $this->config->getAppId();
         $this->params['timestamp'] = $this->config->getTimestamp();
+    }
+
+    public function check(): void
+    {
+        $require = $this->require;
+        $params = $this->params;
+        foreach ($require as $item) {
+            if (is_string($item) && empty($params[$item])) {
+                throw new \InvalidArgumentException("{$item}为必须参数");
+            }
+            if (is_array($item)) {
+                $switch = [];
+                array_walk($item, static function ($value, $k) use ($params, &$switch) {
+                    if (is_array($value)) {
+                        array_walk($value, static function ($val) use (&$switch, $k,$params) {
+                            if (!empty($params[$val])) {
+                                $switch[$k] = true;
+                            } else {
+                                $switch[$k] = false;
+                            }
+                        });
+                    }
+                    if (is_string($value) && empty($params[$value])) {
+                        $switch[$k] = false;
+                    }
+                });
+                if (!in_array(true, $switch, true)) {
+                    $error = '';
+                    array_walk($item, static function ($value) use (&$error) {
+                        if (is_array($value)) {
+                            $error .= trim(implode('、', $value), '、');
+                        }
+                        if (!empty($error) && is_string($value)) {
+                            $error .= '或' . $value;
+                        }
+                    });
+                    throw new \InvalidArgumentException("{$error}至少填写一个");
+                }
+            }
+        }
     }
 }
