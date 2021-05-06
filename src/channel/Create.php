@@ -4,8 +4,8 @@
 namespace polyv\src\channel;
 
 use polyv\src\Basic;
-use polyv\src\Config;
 use GuzzleHttp\Client;
+use polyv\src\Config;
 
 /**
  * 直播频道创建

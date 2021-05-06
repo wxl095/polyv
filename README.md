@@ -1,6 +1,7 @@
 ## 保利威直播自用接口
 
 ### 直播频道创建
+
 ```php
 polyv\src\channel\Create;
 
@@ -14,6 +15,7 @@ $di->setPureRtcEnabled('Y');
 $res = $di->send();
 ```
 ### 频道菜单设置
+
 ```php
 use polyv\src\channel\Menu;
 
@@ -25,6 +27,7 @@ $menu->setType('iframe');
 $ret = $menu->send();
 ```
 ### 直播频道基础设置
+
 ```php
 use polyv\src\channel\BasicSettings;
 
@@ -36,6 +39,7 @@ $set->send();
         
 ```
 ### 直播频道设置
+
 ```php
 use polyv\src\channel\AuthSettings;
 
@@ -49,6 +53,7 @@ $auth->setExternalUri('https://minisite.blue-dot.cn/api/home/liveRoom/userinfo')
 $auth->send();
 ```
 ### 统计直播间内多场次的直播和观看数据
+
 ```php
 use polyv\src\channel\statistics\SessionStats;
 
@@ -59,6 +64,7 @@ $obj->send();
 ```
 
 ### 查询频道观看日志
+
 ```php
 use polyv\src\channel\statistics\ViewLog;
 
@@ -70,6 +76,7 @@ $obj->send();
 ```
 
 ### 查询历史聊天信息
+
 ```php
 use polyv\src\channel\chat\History;
 
