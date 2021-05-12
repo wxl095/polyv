@@ -14,7 +14,7 @@ use polyv\src\Basic;
 class SessionStats extends Basic
 {
     protected $url = "https://api.polyv.net/live/v3/channel/statistics/get-session-stats?";
-
+    protected $require = ['appId', 'timestamp', 'sign', 'channelId'];
     /**
      * 设置频道
      * @param int $channelId
