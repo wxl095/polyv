@@ -9,18 +9,26 @@ use polyv\src\Basic;
 
 class ViewLog extends Basic
 {
-    protected $require = ['appId', 'timestamp', 'page', 'sign', [['startTime', 'endTime'], ['currentDay']]];
-    private $url = "https://api.polyv.net/live/v2/statistics/%s/viewlog?";
+    protected $require = ['appId', 'timestamp', 'sign', [['startTime', 'endTime'], ['currentDay']]];
+    private $url = "https://api.polyv.net/live/v1/statistics/%s/viewlog?";
     private $channelId;
 
-    public function setChannelId($channelId)
+    /**
+     * 设置频道ID
+     * @param $channelId
+     */
+    public function setChannelId($channelId): void
     {
         $this->channelId = $channelId;
     }
 
-    public function setPage($page): void
+    /**
+     * 直播账号ID
+     * @param $userid
+     */
+    public function setUserid($userid): void
     {
-        $this->params['page'] = $page;
+        $this->params['userId'] = $userid;
     }
 
     /**
@@ -42,24 +50,24 @@ class ViewLog extends Basic
         $this->params['endTime'] = $end_time * 1000;
     }
 
-    /**
-     *    观看用户ID
-     * @param string $userid
-     */
-    public function setUserid(string $userid): void
-    {
-        $this->params['param1'] = $userid;
-    }
+//    /**
+//     *    观看用户ID
+//     * @param string $userid
+//     */
+//    public function setUserid(string $userid): void
+//    {
+//        $this->params['param1'] = $userid;
+//    }
 
-    /**
-     * 多个观看用户ID
-     * @param array $userIds
-     * @throws \JsonException
-     */
-    public function setUserIds(array $userIds): void
-    {
-        $this->params['param1s'] = urlencode(json_encode($userIds, JSON_THROW_ON_ERROR));
-    }
+//    /**
+//     * 多个观看用户ID
+//     * @param array $userIds
+//     * @throws \JsonException
+//     */
+//    public function setUserIds(array $userIds): void
+//    {
+//        $this->params['param1s'] = urlencode(json_encode($userIds, JSON_THROW_ON_ERROR));
+//    }
 
     /**
      * 观看用户昵称
