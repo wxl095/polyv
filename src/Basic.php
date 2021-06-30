@@ -39,7 +39,7 @@ abstract class Basic
                 $switch = [];
                 array_walk($item, static function ($value, $k) use ($params, &$switch) {
                     if (is_array($value)) {
-                        array_walk($value, static function ($val) use (&$switch, $k,$params) {
+                        array_walk($value, static function ($val) use (&$switch, $k, $params) {
                             if (!empty($params[$val])) {
                                 $switch[$k] = true;
                             } else {
@@ -65,5 +65,22 @@ abstract class Basic
                 }
             }
         }
+    }
+
+    public static function getSign($params): string
+    {
+        ksort($params, SORT_ASC);
+        $str = $_ENV['POLYV_APP_SECRET'];
+        foreach ($params as $key => $value) {
+            $str .= $key;
+            $str .= $value;
+        }
+        return strtoupper(md5($str . $_ENV['POLYV_APP_SECRET']));
+    }
+
+    public static function getTimestamp(): string
+    {
+        [$s1, $s2] = explode(' ', microtime());
+        return sprintf('%.0f', ($s1 + $s2) * 1000);
     }
 }

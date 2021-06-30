@@ -99,7 +99,7 @@ class AuthSettings extends Basic
         $this->buildData();
         $request = new Request('POST', $this->url . http_build_query($this->params),
             ['Content-Type' => 'application/json'],
-            json_encode($this->settings)
+            json_encode($this->settings, JSON_THROW_ON_ERROR)
         );
         $client = new Client();
         $response = $client->send($request, ['http_errors' => false]);
